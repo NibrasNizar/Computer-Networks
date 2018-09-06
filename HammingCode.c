@@ -22,7 +22,7 @@ void main() {
 	if(c==0) {
 		printf("\ncongratulations there is no error: ");
 	} else {
-		printf("\nerron on the postion: %d\nthe correct message is \n",c);
+		printf("\nerror on the postion: %d\nthe correct message is \n",c);
 		if(rec[7-c]==0)
 		 			rec[7-c]=1; else
 		 			rec[7-c]=0;
