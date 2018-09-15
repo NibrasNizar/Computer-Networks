@@ -1,5 +1,4 @@
 #include<stdio.h>
-#include<conio.h>
 void main() {
 	int data[7],rec[7],i,c1,c2,c3,c;
 	printf("this works for message of 4bits in size \nenter message bit one by one:  ");
@@ -30,5 +29,4 @@ void main() {
 			printf("%d ",rec[i]);
 		}
 	}
-	getch();
 }
