@@ -1,27 +1,23 @@
-#include<stdio.h>
-#include<sys/types.h>
-#include<sys/socket.h>
-#include<netinet/in.h>
-#include<netdb.h>
-#define SERV_TCP_PORT 631
-int main(int argc,char*argv[])
+#include <stdio.h>
+#include <arpa/inet.h>
+#include <fcntl.h>
+#include <unistd.h>
+int main()
 {
-   	int sockfd;
-   	struct sockaddr_in serv_addr;
-   	struct hostent *server;
-   	char buffer[4096];
-   	sockfd=socket(AF_INET,SOCK_STREAM,0);
-   	serv_addr.sin_family=AF_INET;
-   	serv_addr.sin_addr.s_addr=inet_addr("127.0.0.1");
-   	serv_addr.sin_port=htons(SERV_TCP_PORT);
-   	printf("\nReady for sending...");
-   	connect(sockfd,(struct sockaddr*)&serv_addr,sizeof(serv_addr));
-   	printf("\nEnter the message to send\n");
-   	printf("\nClient: ");
-   	fgets(buffer,4096,stdin);
-   	write(sockfd,buffer,4096);
-   	printf("Serverecho:%s",buffer);
-   	printf("\n");
-   	close(sockfd);
-   	return 0;
+    int soc, n;
+    char buffer[1024], fname[50];
+    struct sockaddr_in addr;
+    soc = socket(PF_INET, SOCK_STREAM, 0);
+    addr.sin_family = AF_INET;
+    addr.sin_port = htons(7891);
+    addr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    while(connect(soc, (struct sockaddr *) &addr, sizeof(addr))) ;
+    printf("\nClient is connected to Server");
+    printf("\nEnter file name: ");
+    scanf("%s", fname);
+    send(soc, fname, sizeof(fname), 0);
+    printf("\nRecieved response\n");
+    while ((n = recv(soc, buffer, sizeof(buffer), 0)) > 0)
+    printf("%s", buffer);
+    return 0;
 }
