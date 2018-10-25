@@ -8,7 +8,6 @@ void xo(){
     for(c = 1;c < N; c++)
     cs[c] = (( cs[c] == g[c])?'0':'1');
 }
-
 void crc(){
     for(e=0;e<N;e++)
         cs[e]=t[e];
