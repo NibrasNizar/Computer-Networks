@@ -4,7 +4,6 @@
 using namespace std;
 char t[28],cs[28],g[]="10001000000100001";
 int a,e,c;
-
 void xo(){
     for(c = 1;c < N; c++)
     cs[c] = (( cs[c] == g[c])?'0':'1');
