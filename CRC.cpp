@@ -4,20 +4,15 @@ using namespace std;
 
 char g[]="10001000000100001";
 int gl=strlen(g);
-
 char d[30], md[30];
 int dl,mdl;
-
 int i,j,k;
-
 char cs[20], rem[20];
 int flag=0;
-
 void xo()
 {
   for (int i=0;i<gl;i++)
     rem[i]=((cs[i]==g[i])?'0':'1');
-  
 }
 void crc(){
 //adding modified data to check sum array
@@ -70,10 +65,8 @@ cout<<mdl<<endl<<"The modified data is: "<<endl;
 for ( i=0;i<mdl;i++)
   cout<<md[i]<<" ";
   
-cout<<endl<<endl;
-  
+cout<<endl<<endl; 
 crc();
-
 for (i=dl,j=1;i<dl+gl-1;i++,j++)
   md[i]=rem[j];
   
@@ -83,7 +76,6 @@ mdl=strlen(md);
   for ( i=0;i<mdl;i++)
   cout<<md[i]<<" ";
   cout<<endl<<endl;
-  
   cout<<"enter the code word received : ";
   cin>>md;
   mdl=strlen(md);
@@ -92,15 +84,12 @@ mdl=strlen(md);
   cout<<md[i]<<" ";
   
 crc();
-  
   for (i=1;i<gl;i++)
   {
     if(rem[i]=='1'){
       flag=1;
       break;
     }
-    
-
   }
   if(flag)
   {
@@ -108,5 +97,4 @@ crc();
   }
   else
   cout<<"no error!"<<endl;
-
 }
