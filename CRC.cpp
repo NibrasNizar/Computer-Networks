@@ -1,64 +1,112 @@
-#include<iostream>
-#include<string.h>
-#define N strlen(g)
+#include <iostream>
+#include <cstring>
 using namespace std;
-char t[28],cs[28],g[]="10001000000100001";
-int a,e,c;
-void xo(){
-    for(c = 1;c < N; c++)
-    cs[c] = (( cs[c] == g[c])?'0':'1');
+
+char g[]="10001000000100001";
+int gl=strlen(g);
+
+char d[30], md[30];
+int dl,mdl;
+
+int i,j,k;
+
+char cs[20], rem[20];
+int flag=0;
+
+void xo()
+{
+  for (int i=0;i<gl;i++)
+    rem[i]=((cs[i]==g[i])?'0':'1');
+  
 }
 void crc(){
-    for(e=0;e<N;e++)
-        cs[e]=t[e];
-    do{
-        if(cs[0]=='1')
-            xo();
-        for(c=0;c<N-1;c++)
-            cs[c]=cs[c+1];
-        cs[c]=t[e++];
-    }while(e<=a+N-1);
+//adding modified data to check sum array
+    for(j=0;j<gl;j++)
+    cs[j]=md[j];
+    cout<<endl;
+    
+  for(i=0;i<dl;i++)
+  {
+    if(cs[0]=='1')
+    xo();
+    else
+    {
+      for(k=0;k<gl;k++)
+      rem[k]=cs[k];
+    }
+
+    for(k=0;k<gl-1;k++)
+      cs[k]=rem[k+1];
+      
+      cs[k]=md[gl+i];
+  }
+cout<<"final remainder is "<<endl;
+for ( i=1;i<gl;i++)
+  cout<<rem[i]<<" ";
 }
+
+
 int main()
 {
-    cout<<"\nEnter data : ";
-    cin>>t;
-    cout<<".............................................";
-    cout<<"\nGeneratng polynomial :";
-    cout<<g;
-    a=strlen(t);
-    for(e=a;e<a+N-1;e++)
-        t[e]='0';
-    cout<<"\n----------------------------------------";
-    cout<<"\nModified data is : ";
-    cout<<t;
-    cout<<"\n----------------------------------------";
-    crc();
-    cout<<"\nChecksum is :";
-    cout<<cs;
-    for(e=a;e<a+N-1;e++)
-        t[e]=cs[e-a];
-    cout<<"\n----------------------------------------";
-    cout<<"\nFinal codeword is :"<<t;
-    cout<<"\n----------------------------------------";
-    cout<<"\nTest error detection 0(yes) 1(no)? : ";
-    cin>>e;
-    if(e==0)
-    {
-        do{
-            cout<<"\nEnter the position where error is to be inserted : ";
-            cin>>e;
-        }while(e==0 || e>a+N-1);
-        t[e-1]=(t[e-1]=='0')?'1':'0';
-        cout<<"\n----------------------------------------";
-        cout<<"\nErroneous data :"<<t;
+cout<<"Enter data: " <<endl;
+cin>>d;
+dl=strlen(d);
+cout<<dl<<endl;
+  
+for (i=0;i<dl;i++)
+  cout<<d[i]<<"   ";
+
+for (i=0;i<dl;i++)
+  md[i]=d[i];
+  
+cout<<endl;
+
+for (i=dl;i<dl+gl-1;i++)
+  md[i]='0';
+
+mdl=strlen(md);
+cout<<mdl<<endl<<"The modified data is: "<<endl;
+
+for ( i=0;i<mdl;i++)
+  cout<<md[i]<<" ";
+  
+cout<<endl<<endl;
+  
+crc();
+
+for (i=dl,j=1;i<dl+gl-1;i++,j++)
+  md[i]=rem[j];
+  
+mdl=strlen(md);
+ // cout<<mdl<<endl;
+ cout<<endl<<"codeword sent"<<endl;
+  for ( i=0;i<mdl;i++)
+  cout<<md[i]<<" ";
+  cout<<endl<<endl;
+  
+  cout<<"enter the code word received : ";
+  cin>>md;
+  mdl=strlen(md);
+  cout<<mdl<<endl;
+  for ( i=0;i<mdl;i++)
+  cout<<md[i]<<" ";
+  
+crc();
+  
+  for (i=1;i<gl;i++)
+  {
+    if(rem[i]=='1'){
+      flag=1;
+      break;
     }
-    crc();
-    for(e=0;(e<N-1) && (cs[e]!='1');e++);
-        if(e<N-1)
-            cout<<"\nError detected\n\n";
-        else
-            cout<<"\nNo error detected\n\n";
-            cout<<"\n----------------------------------------\n";
-        return 0;
+    
+
+  }
+  if(flag)
+  {
+    cout<<"error detected!"<<endl;
+  }
+  else
+  cout<<"no error!"<<endl;
+
 }
