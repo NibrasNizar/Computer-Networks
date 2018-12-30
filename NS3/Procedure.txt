@@ -13,6 +13,9 @@ refer third.cc in examples/tutorials.
 Add flow-monitor-module header
 Copy same for loop as second from examples/wireless/power-adaption-interface.cc
 Copy UDP flow from traffic-control.cc
+In UDP flow, sinkapp->csmaNodes.get(nCsma)
+apps.Add -> wifiStaNodes.Get(nWifi-1)
+remoteAddress -> csmaInterfaces.GetAddress(nCsma)
 
 Fourth program:- 
 first go to examples/wireless/wifi-simple-adhoc.cc and add 3 header files which are on lines 61-63 in completed code.
