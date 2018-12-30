@@ -20,6 +20,7 @@ Copy flow again from traffic-control.cc
 Copy same for loop from power-adaption upto throughput line.
 
 Fifth program:-
+use file src/csma/examples/csma-ping
 add Time interPacket...... Line from wifi-simple-adhoc.cc
 Change number of nodes to 6.
 Add onoff functions from traffic-control.cc which is at lines 92-95 in completed code.
